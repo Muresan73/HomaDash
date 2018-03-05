@@ -14,12 +14,15 @@ let response = {
     data: [],
     message: null
 };
-
+var i = 0;
 // Get users
 router.get('/test', (req, res) => {
     console.log("sent data: alma");
-    response.data = ["alma"]
+    response.data = [i]
+    i = i + 1;
     res.json(response);
 });
+
+
 
 module.exports = router;
