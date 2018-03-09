@@ -1,5 +1,6 @@
-import { Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from './data.service';
+import { MeasurementsObject } from './model/measurements';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,12 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
   title = 'Test';
+  loop: any;
 
-  data: Array<any>;
+  data: MeasurementsObject[];
 
   getData() {
-
-    this._dataService.getTestData().subscribe(res => res.forEach(element => {
+    this._dataService.getMesurementData().subscribe(res => res.forEach(element => {
       if (this.data.length > 10) {
         this.data.shift();
       }
@@ -22,8 +23,17 @@ export class AppComponent {
     console.log(this.data);
   }
 
+  getTestData() {
+    this._dataService.getMesurementData().subscribe(res => console.log(res));
+
+  }
+
+  stopit() {
+    clearInterval(this.loop);
+  }
+
   constructor(private _dataService: DataService) {
-    this._dataService.getTestData().subscribe(res => this.data = res);
-    setInterval(() => { this.getData(); }, 1000);
+    this._dataService.getMesurementData().subscribe(res => this.data = res);
+    // this.loop = setInterval(() => { this.getData(); }, 1000);
   }
 }
