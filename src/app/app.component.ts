@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
-import { MeasurementsObject } from './model/measurements';
+import { Measurements } from './model/measurements';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,11 @@ import { MeasurementsObject } from './model/measurements';
 export class AppComponent {
   title = 'Test';
   loop: any;
+  datas = new Array<Measurements>();
 
-  datas = new Array<MeasurementsObject[]>();
+  constructor(private _dataService: DataService) {
+    this.loop = setInterval(() => { this.getData(); }, 986);
+  }
 
   getData() {
     this._dataService.getMeasurementData().subscribe(res => {
@@ -30,9 +33,5 @@ export class AppComponent {
 
   stopit() {
     clearInterval(this.loop);
-  }
-
-  constructor(private _dataService: DataService) {
-    this.loop = setInterval(() => { this.getData(); }, 986);
   }
 }

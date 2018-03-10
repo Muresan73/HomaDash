@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { MeasurementsObject } from './model/measurements';
+import { Measurements } from './model/measurements';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -14,8 +14,8 @@ export class DataService {
       .map(result => result.json().data);
   }
 
-  getMeasurementData(): Observable<MeasurementsObject[]> {
+  getMeasurementData(): Observable<Measurements> {
     return this._http.get('/api/mmnts')
-      .map(result => result.json() as MeasurementsObject[]);
+      .map(result => result.json() as Measurements);
   }
 }

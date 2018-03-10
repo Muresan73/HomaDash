@@ -4,9 +4,9 @@
     Welcome to {{ title }}!
   </h1>
   <ul>
-    <li *ngFor="let data of datas">Devices:
+    <li *ngFor="let data of datas">Devices: {{data.timestamp | date:'yy-MM-dd HH:mm:ss'}}
       <ul>
-        <li *ngFor="let d of data">{{d.deviceid}},{{d.timestamp}}| {{d.value}}</li>
+        <li *ngFor="let d of data.devices">{{d.deviceid}}| {{d.value}}</li>
       </ul>
     </li>
   </ul>

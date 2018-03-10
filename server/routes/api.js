@@ -27,27 +27,26 @@ router.get('/test', (req, res) => {
 
 router.get('/mmnts', (req, res) => {
     console.log("sent measurements test data ");
-    dt = Date.now();
-    let testmmntResponse = [
-        {
-            devicid: "lc92",
-            timestamp: dt,
-            value: dt * 13 % 100,
-            unit: "Volt"
-        },
-        {
-            deviceid: "pq44",
-            timestamp: dt,
-            value: dt * 7 % 100,
-            unit: "Bar"
-        },
-        {
-            deviceid: "ks89",
-            timestamp: dt,
-            value: dt * 17 % 100,
-            unit: "Nm"
-        }
-    ];
+    let testmmntResponse = {
+        timestamp: Date.now(),
+        devices: [
+            {
+                deviceid: "lc92",
+                value: Date.now() * 13 % 100,
+                unit: "Volt"
+            },
+            {
+                deviceid: "pq44",
+                value: Date.now() * 7 % 100,
+                unit: "Bar"
+            },
+            {
+                deviceid: "ks89",
+                value: Date.now() * 17 % 100,
+                unit: "Nm"
+            }
+        ]
+    };
     res.json(testmmntResponse);
 });
 
