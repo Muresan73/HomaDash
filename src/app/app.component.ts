@@ -11,20 +11,20 @@ export class AppComponent {
   title = 'Test';
   loop: any;
 
-  data: MeasurementsObject[];
+  datas = new Array<MeasurementsObject[]>();
 
   getData() {
-    this._dataService.getMesurementData().subscribe(res => res.forEach(element => {
-      if (this.data.length > 10) {
-        this.data.shift();
+    this._dataService.getMeasurementData().subscribe(res => {
+      if (this.datas.length > 3) {
+        this.datas.shift();
       }
-      this.data.push(element);
-    }));
-    console.log(this.data);
+      this.datas.push(res);
+    });
+    // console.log(this.datas);
   }
 
   getTestData() {
-    this._dataService.getMesurementData().subscribe(res => console.log(res));
+    this._dataService.getMeasurementData().subscribe(res => console.log(res));
 
   }
 
@@ -33,7 +33,6 @@ export class AppComponent {
   }
 
   constructor(private _dataService: DataService) {
-    this._dataService.getMesurementData().subscribe(res => this.data = res);
-    // this.loop = setInterval(() => { this.getData(); }, 1000);
+    this.loop = setInterval(() => { this.getData(); }, 986);
   }
 }

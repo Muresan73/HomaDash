@@ -16,6 +16,6 @@ export class DataService {
 
   getMeasurementData(): Observable<MeasurementsObject[]> {
     return this._http.get('/api/mmnts')
-      .map(result => result.json());
+      .map(result => result.json() as MeasurementsObject[]);
   }
 }
