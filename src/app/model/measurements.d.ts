@@ -5,6 +5,7 @@ export interface MeasurementObject {
     value: Number;
     unit: string;
 }
+
 export interface Measurements {
     devices: MeasurementObject[];
     timestamp: Date;

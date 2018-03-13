@@ -8,11 +8,13 @@
   <button (click)="getTestData()">test</button>
   <button (click)="stopit()">Stop</button>
   <h2>Chart area</h2>
-  <canvas id="canvas">{{chart}}</canvas>
+  <app-data-chart [refreshSubject]="refreshSubject" devideId="lc92" id=lc92></app-data-chart>
+  <app-data-chart [refreshSubject]="refreshSubject" devideId="pq44" id=pq44></app-data-chart>
+  <h2>Ref Chert area</h2>
   <ul>
     <li *ngFor="let data of datas">Devices: {{data.timestamp | date:'yy-MM-dd HH:mm:ss'}}
       <ul>
-        <li *ngFor="let d of data.devices">{{d.deviceid}}| {{d.value}}</li>
+        <li *ngFor="let d of data.devices" id={{d.deviceid}}>{{d.deviceid}}| {{d.value}}</li>
       </ul>
     </li>
   </ul>
