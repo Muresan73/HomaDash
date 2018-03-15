@@ -15,9 +15,8 @@ export class DataChartComponent implements AfterContentInit {
   chart: Chart;
   @Input() refreshSubject: Subject<any>;
   @Input() devideId: string;
-  myId: string;
 
-  constructor(private _dataService: DataService) { this.myId = 'chart' + this.devideId; }
+  constructor(private _dataService: DataService) { }
 
   getFreshData(timestamp: Date) {
     const measurementObject = this._dataService.getMeasurementDataById(this.devideId);
@@ -34,9 +33,7 @@ export class DataChartComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
 
-    console.log('---' + this.myId);
-    console.log(document.getElementById(this.devideId).getElementsByClassName('datachart')[0]);
-    console.log('---');
+
     this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
     this.chart = new Chart(document.getElementById(this.devideId).getElementsByClassName('datachart')[0],
       {
@@ -60,7 +57,7 @@ export class DataChartComponent implements AfterContentInit {
           },
           elements: {
             point: {
-              radius: 0
+              radius: 2
             }
           },
           tooltips: {
@@ -71,12 +68,14 @@ export class DataChartComponent implements AfterContentInit {
             }
           },
           scales: {
-            yAxes: {
-              display: false
-            },
-            xAxes: {
+            xAxes: [{
+              display: false,
               type: 'time',
-            }
+              distribution: 'linear',
+              time: {
+                tooltipFormat: 'HH:mm:ss YY/M/d'
+              }
+            }]
           }
         }
       });
