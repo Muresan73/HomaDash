@@ -1,0 +1,8 @@
+<mat-grid-list [cols]="w">
+  <mat-grid-tile [colspan]="w.valueOf() - 1">
+    <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject"></app-data-chart>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1">
+    <app-dinamic-icon [refreshSubject]="refreshSubject" iconType="temp" [devideId]="id" min="0" max="100"></app-dinamic-icon>
+  </mat-grid-tile>
+</mat-grid-list>

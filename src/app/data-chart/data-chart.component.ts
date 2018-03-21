@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Measurements, MeasurementObject } from '../model/measurements';
 import { DataService } from '../data.service';
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './data-chart.component.html',
   styleUrls: ['./data-chart.component.css']
 })
-export class DataChartComponent implements AfterContentInit {
+export class DataChartComponent implements OnInit {
 
   chart: Chart;
   @Input() refreshSubject: Subject<any>;
@@ -20,6 +20,7 @@ export class DataChartComponent implements AfterContentInit {
 
   getFreshData(timestamp: Date) {
     const measurementObject = this._dataService.getMeasurementDataById(this.devideId);
+    console.log(this.devideId);
     console.log(measurementObject);
     if (this.chart) {
       this.chart.data.labels.push(timestamp);
@@ -31,10 +32,13 @@ export class DataChartComponent implements AfterContentInit {
   }
 
 
-  ngAfterContentInit(): void {
+  ngOnInit(): void {
 
+    console.log(this.devideId);
+    console.log(document.getElementById(this.devideId));
 
     this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
+    console.log(document.getElementById(this.devideId).getElementsByClassName('datachart')[0]);
     this.chart = new Chart(document.getElementById(this.devideId).getElementsByClassName('datachart')[0],
       {
         type: 'line',
