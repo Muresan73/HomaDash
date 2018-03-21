@@ -10,9 +10,10 @@
   <h2>Chart area</h2>
   <div width="300">
     <app-data-chart [refreshSubject]="refreshSubject" devideId="lc92" id=lc92></app-data-chart>
-    <app-data-chart [refreshSubject]="refreshSubject" devideId="pq44" id=pq44></app-data-chart>
+    <app-data-chart [refreshSubject]="refreshSubject" devideId="pq44" id=pq44 hidden=true></app-data-chart>
   </div>
   <h2>Ref Icon area</h2>
+  <app-dinamic-icon [refreshSubject]="refreshSubject" iconType="temp" devideId="lc92" min="0" max="100"></app-dinamic-icon>
   <app-dinamic-icon [refreshSubject]="refreshSubject" devideId="lc92" min="0" max="100"></app-dinamic-icon>
   <ul>
     <li *ngFor="let data of datas">Devices: {{data.timestamp | date:'yy-MM-dd HH:mm:ss'}}

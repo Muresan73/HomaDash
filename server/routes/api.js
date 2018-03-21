@@ -24,7 +24,7 @@ router.get('/test', (req, res) => {
     res.json(response);
 });
 
-
+// GET measurements
 router.get('/mmnts', (req, res) => {
     console.log("sent measurements test data ");
     let testmmntResponse = {
@@ -48,6 +48,27 @@ router.get('/mmnts', (req, res) => {
         ]
     };
     res.json(testmmntResponse);
+});
+
+// GET data specs
+router.get('/specs', (req, res) => {
+    console.log("sent specs");
+    let specsResponse = [
+        {
+            deviceid: "lc92",
+            unit: "Volt"
+        },
+        {
+            deviceid: "pq44",
+            unit: "Bar"
+        },
+        {
+            deviceid: "ks89",
+            unit: "Nm"
+        }
+    ]
+        ;
+    res.json(specsResponse);
 });
 
 module.exports = router;

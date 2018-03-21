@@ -1,8 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, AnimationTransitionMetadata, AnimationTransitionEvent } from '@angular/core';
 import { DataService } from './data.service';
 import { Measurements } from './model/measurements';
 import { Chart } from 'chart.js';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+import { AnimateTimings } from '@angular/core/src/animation/dsl';
 
 @Component({
   selector: 'app-root',
@@ -34,11 +36,8 @@ export class AppComponent {
 
       console.log('értesít');
       this.notifyChildren(res.timestamp);
-
-
+      Array.from(document.getElementsByClassName('anim')).map((x) => x.beginElement());
     });
-
-
   }
 
   getTestData() {
