@@ -1,0 +1,65 @@
+:host {
+    position: absolute;
+    display: flex;
+    display: -webkit-inline-box;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.panel-heading {
+    border-bottom: 1px solid #F0F0F0;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.panel-heading .panel-title {
+    padding: 0px;
+    margin: 0;
+    text-align: center;
+}
+
+.panel-body {
+    overflow: auto;
+    padding: 0 10px 10px;
+    position: absolute;
+    top: 37px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.dashboard {
+    flex: 1;
+}
+
+.main-content {
+    width: 100%;
+    flex: 1 0px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.gridster-item-prototype.is-over .gridster-item-inner {
+    visibility: visible;
+}
+
+.gridster-item-inner {
+    visibility: visible;
+}
+
+.gridster-item-inner {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    visibility: visible;
+    -webkit-transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    -moz-transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    -o-transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+}

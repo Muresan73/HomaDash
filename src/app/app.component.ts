@@ -14,8 +14,6 @@ import { WidgetComponent } from './widget/widget.component';
 })
 export class AppComponent {
 
-
-  title = 'Test';
   loop: any;
   datas = new Array<Measurements>();
   chart: Chart;
@@ -34,18 +32,47 @@ export class AppComponent {
       resizable: true,
       title: 'pq44'
     }, {
-      x: 0, y: 0, w: 3, h: 1,
+      x: 1, y: 0, w: 3, h: 1,
       resizable: true,
       title: 'pq44'
     }
   ];
   gridsterOptions = {
-    lanes: 3, // how many lines (grid cells) dashboard has
+    lanes: 5, // how many lines (grid cells) dashboard has
     direction: 'vertical', // items floating direction: vertical/horizontal
-    maxHeight: 1,
-    widthHeightRatio: 0.8,
+    widthHeightRatio: 1,
+    floating: true,
     resizable: true, // possible to resize items by drag n drop by item edge/corner
     useCSSTransforms: true, // improves rendering performance by using CSS transform in place of left/top
+    responsiveView: true, // turn on adopting items sizes on window resize and enable responsiveOptions
+    responsiveDebounce: 500, // window resize debounce time
+
+    responsiveOptions: [
+      {
+        breakpoint: 'sm',
+        minWidth: 0,
+        lanes: 3
+      },
+      {
+        breakpoint: 'md',
+        minWidth: 768,
+        lanes: 4
+      },
+      {
+        breakpoint: 'lg',
+        minWidth: 1250,
+        lanes: 6
+      },
+      {
+        breakpoint: 'xl',
+        minWidth: 1800,
+        lanes: 8
+      }
+    ]
+  };
+  itemOptions = {
+    maxWidth: 3,
+    maxHeight: 1
   };
 
   constructor(private _dataService: DataService) {
