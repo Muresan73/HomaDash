@@ -76,7 +76,7 @@ export class AppComponent {
   };
 
   constructor(private _dataService: DataService) {
-    this.loop = setInterval(() => { this.getData(); }, 986);
+    // this.loop = setInterval(() => { this.getData(); }, 986);
   }
 
   notifyChildren(timestamp: Date) {
@@ -90,7 +90,7 @@ export class AppComponent {
       }
       this.datas.push(res);
       this.notifyChildren(res.timestamp);
-      Array.from(document.getElementsByClassName('anim')).map((x) => x.beginElement());
+      // Array.from(document.getElementsByClassName('anim')).map((x) => x.beginElement());
     });
   }
 

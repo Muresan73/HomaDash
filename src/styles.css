@@ -3,10 +3,6 @@
 
 /* You can add global styles to this file, and also import other style files */
 
-html {
-    overflow: hidden;
-}
-
 body {
     font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -15,20 +11,6 @@ body {
     background-color: #eeeded;
     margin: 0;
     height: 100%;
-    overflow: hidden;
-}
-
-div {
-    display: block;
-}
-
-a {
-    text-decoration: none;
-}
-
-p {
-    display: inline-block;
-    width: 100%;
 }
 
 .position-highlight .inner {

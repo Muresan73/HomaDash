@@ -1,4 +1,4 @@
-:host {
+/* :host {
     position: absolute;
     display: flex;
     display: -webkit-inline-box;
@@ -6,7 +6,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
-}
+} */
 
 .panel-heading {
     border-bottom: 1px solid #F0F0F0;
@@ -35,13 +35,14 @@
     flex: 1;
 }
 
-.main-content {
+
+/* .main-content {
     width: 100%;
     flex: 1 0px;
     display: flex;
     flex-direction: column;
     overflow: auto;
-}
+} */
 
 .gridster-item-prototype.is-over .gridster-item-inner {
     visibility: visible;
