@@ -38,7 +38,7 @@ export class DataChartComponent implements OnInit {
     console.log(document.getElementById(this.devideId));
 
     this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
-    console.log(document.getElementById(this.devideId).getElementsByClassName('datachart')[0]);
+    // console.log(document.getElementById(this.devideId).getElementsByClassName('datachart')[0]);
     this.chart = new Chart(document.getElementById(this.devideId).getElementsByClassName('datachart')[0],
       {
         type: 'line',

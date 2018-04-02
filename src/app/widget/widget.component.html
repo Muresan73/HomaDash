@@ -1,8 +1,33 @@
-<mat-grid-list [cols]="w">
-  <mat-grid-tile [colspan]="w.valueOf() - 1">
+ng-gauge
+
+
+<ng-gauge size="150" type="arch" thick="7" value="68.2" cap="round" label="Speed" append="mph" foreground-color="#2ecc71"
+  background-color="#ecf0f1"></ng-gauge>
+<ng-gauge [bgColor]="laneGraph.bgColor" [rounded]="laneGraph.rounded" [reverse]="laneGraph.reverse" [animationSecs]="laneGraph.animationSecs"
+  [segments]="laneGraph.segments">
+</ng-gauge>
+
+
+
+
+
+
+
+
+Grid
+<mat-grid-list cols=2>
+  <mat-grid-tile colspan="1">
     <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject"></app-data-chart>
   </mat-grid-tile>
   <mat-grid-tile colspan="1">
-    <app-dinamic-icon [refreshSubject]="refreshSubject" iconType="temp" [devideId]="id" min="0" max="100"></app-dinamic-icon>
+    <!-- <ng-gauge size="150" type="arch" thick="7" value="68.2" cap="round" label="Speed" append="mph" foreground-color="#2ecc71"
+      background-color="#ecf0f1"></ng-gauge> -->
+
+
+    <ng-gauge [bgColor]="laneGraph.bgColor" [rounded]="laneGraph.rounded" [reverse]="laneGraph.reverse" [animationSecs]="laneGraph.animationSecs"
+      [segments]="laneGraph.segments">
+    </ng-gauge>
+
+
   </mat-grid-tile>
 </mat-grid-list>

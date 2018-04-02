@@ -9,6 +9,7 @@ import { DataChartComponent } from './data-chart/data-chart.component';
 import { GridsterModule } from 'angular2gridster';
 import { WidgetComponent } from './widget/widget.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { GaugeModule } from 'ng-gauge';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     BrowserModule,
     HttpModule,
     GridsterModule,
-    MatGridListModule
+    MatGridListModule,
+    GaugeModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
