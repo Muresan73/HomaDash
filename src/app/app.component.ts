@@ -46,7 +46,7 @@ export class AppComponent {
     useCSSTransforms: true, // improves rendering performance by using CSS transform in place of left/top
     responsiveView: true, // turn on adopting items sizes on window resize and enable responsiveOptions
     responsiveDebounce: 500, // window resize debounce time
-
+    resizeHandles: { e: true, w: true },
     responsiveOptions: [
       {
         breakpoint: 'sm',
