@@ -1,0 +1,56 @@
+:host {
+    position: relative;
+    display: flex;
+    display: -webkit-inline-box;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+mwl-gauge {
+    display: block;
+}
+
+mwl-gauge>.gauge {
+    height: 500;
+}
+
+mwl-gauge>.gauge>.dial {
+    stroke: #eee;
+    stroke-width: 2;
+    fill: rgba(0, 0, 0, 0);
+}
+
+mwl-gauge>.gauge>.value {
+    stroke: rgb(47, 227, 255);
+    stroke-width: 2;
+    fill: rgba(0, 0, 0, 0);
+}
+
+mwl-gauge>.gauge>.value-text {
+    fill: rgb(47, 227, 255);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+mat-grid-list {
+    height: inherit;
+    position: relative;
+}
+
+.itemgauge {
+    width: 100px;
+    float: left;
+}
+
+.itemchart {
+    flex: auto;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.widgetitem {
+    display: flex;
+}
