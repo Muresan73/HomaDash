@@ -14,7 +14,11 @@
     kuki
   </div>
   <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">
-    <mwl-gauge [max]="100" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [value]="50" [animated]="true" [animationDuration]="1">
+    <mwl-gauge class="gauge-container five" [max]="100" [dialStartAngle]="90" [dialEndAngle]="0" [value]="value" [animated]="true"
+      [animationDuration]="1">
+
     </mwl-gauge>
+    <span class="value-text">{{unit}}</span>
+
   </div>
 </div>

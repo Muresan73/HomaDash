@@ -4,6 +4,7 @@ import { GaugeSegment, GaugeLabel } from 'ng-gauge';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-widget',
@@ -13,7 +14,9 @@ import { Observable } from 'rxjs/Observable';
 export class WidgetComponent implements OnInit {
 
 
-  @Input() id: Number;
+  value: number;
+  unit: string;
+  @Input() id: String;
   @Input() w: Number;
   @Input() gwidth: Number;
   @Input() refreshSubject: Subject<any>;
@@ -21,75 +24,7 @@ export class WidgetComponent implements OnInit {
     return !(this.w > 1);
   }
 
-
-  colors = {
-    indigo: '#14143e',
-    pink: '#fd1c49',
-    orange: '#ff6e00',
-    yellow: '#f0c800',
-    mint: '#00efab',
-    cyan: '#05d1ff',
-    purple: '#841386',
-    white: '#fff'
-  };
-
-  laneGraph = {
-    bgRadius: 100,
-    bgColor: this.colors.indigo,
-    rounded: true,
-    reverse: true,
-    animationSecs: 5,
-    segments: [
-      new GaugeSegment({
-        value: 4,
-        color: this.colors.mint,
-        bgColor: `${this.colors.mint}22`,
-        radius: 85,
-        borderWidth: 2
-      }),
-      new GaugeSegment({
-        value: 8,
-        color: this.colors.pink,
-        bgColor: `${this.colors.pink}22`,
-        radius: 70,
-        borderWidth: 2
-      }),
-      new GaugeSegment({
-        value: 15,
-        color: this.colors.cyan,
-        bgColor: `${this.colors.cyan}22`,
-        radius: 55,
-        borderWidth: 2
-      }),
-      new GaugeSegment({
-        value: 16,
-        color: this.colors.yellow,
-        bgColor: `${this.colors.yellow}22`,
-        radius: 40,
-        borderWidth: 2
-      }),
-      new GaugeSegment({
-        value: 23,
-        color: this.colors.purple,
-        bgColor: `${this.colors.purple}22`,
-        radius: 25,
-        borderWidth: 2
-      }),
-      new GaugeSegment({
-        value: 42,
-        color: this.colors.orange,
-        bgColor: `${this.colors.orange}22`,
-        radius: 10,
-        borderWidth: 2
-      })
-    ]
-  };
-
-  resizeing() {
-    this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
-  }
-
-  constructor() {
+  constructor(private _dataService: DataService) {
     Observable.fromEvent(window, 'resize')
       .debounceTime(550)
       .subscribe((event) => {
@@ -97,9 +32,17 @@ export class WidgetComponent implements OnInit {
       });
 
   }
-
+  resizeing() {
+    this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
+  }
+  getFreshData(timestamp: Date) {
+    const freshMeasurementData = this._dataService.getMeasurementDataById(this.id.toString());
+    this.value = freshMeasurementData.value.valueOf();
+    this.unit = freshMeasurementData.unit.toString();
+  }
 
   ngOnInit() {
+    this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
     this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
     // Array.from(document.getElementsByClassName('itemgauge'))
     //   .map(gauge => {

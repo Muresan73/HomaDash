@@ -90,7 +90,6 @@ export class AppComponent {
       }
       this.datas.push(res);
       this.notifyChildren(res.timestamp);
-      // Array.from(document.getElementsByClassName('anim')).map((x) => x.beginElement());
     });
   }
 

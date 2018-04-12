@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 /* You can add global styles to this file, and also import other style files */
 
 body {
@@ -54,4 +53,32 @@ body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.48);
     top: -3px;
     bottom: 13px;
+}
+
+mwl-gauge {
+    overflow: hidden;
+}
+
+mwl-gauge>.gauge>.dial {
+    stroke: #717b85;
+    stroke-width: 10;
+}
+
+mwl-gauge>.gauge>.value {
+    stroke: #C9DE3C;
+    stroke-width: 10;
+}
+
+mwl-gauge>.gauge>.value-text {
+    fill: #C9DE3C;
+    font-size: 1.5em;
+}
+
+.value-text {
+    color: #C9DE3C;
+    position: relative;
+    bottom: 40%;
+    left: 65%;
+    font-family: monospace;
+    font-size: 1.5em;
 }
