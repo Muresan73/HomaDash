@@ -10,10 +10,10 @@
 </mat-grid-list> -->
 
 <div class="widgetitem">
-  <div class="itemchart">
+  <div class="itemchart" [style.display]="hideChart?'none':'inherit'">
     kuki
   </div>
-  <div class="itemgauge">
+  <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">
     <mwl-gauge [max]="100" [dialStartAngle]="-90" [dialEndAngle]="-90.001" [value]="50" [animated]="true" [animationDuration]="1">
     </mwl-gauge>
   </div>

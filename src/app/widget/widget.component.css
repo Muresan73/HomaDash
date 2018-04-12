@@ -41,7 +41,7 @@ mat-grid-list {
 }
 
 .itemgauge {
-    width: 100px;
+    min-width: 100px;
     float: left;
 }
 
@@ -53,4 +53,6 @@ mat-grid-list {
 
 .widgetitem {
     display: flex;
+    width: 100%;
+    height: 100%;
 }

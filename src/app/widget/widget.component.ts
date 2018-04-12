@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { GaugeSegment, GaugeLabel } from 'ng-gauge';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-widget',
@@ -9,9 +12,14 @@ import { GaugeSegment, GaugeLabel } from 'ng-gauge';
 })
 export class WidgetComponent implements OnInit {
 
+
   @Input() id: Number;
   @Input() w: Number;
+  @Input() gwidth: Number;
   @Input() refreshSubject: Subject<any>;
+  get hideChart() {
+    return !(this.w > 1);
+  }
 
 
   colors = {
@@ -77,12 +85,27 @@ export class WidgetComponent implements OnInit {
     ]
   };
 
+  resizeing() {
+    this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
+  }
 
   constructor() {
+    Observable.fromEvent(window, 'resize')
+      .debounceTime(550)
+      .subscribe((event) => {
+        this.resizeing();
+      });
 
   }
 
+
   ngOnInit() {
+    this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
+    // Array.from(document.getElementsByClassName('itemgauge'))
+    //   .map(gauge => {
+    //     (<HTMLElement>gauge).style.width = '200px';
+    //     console.log((<HTMLElement>gauge).parentElement.parentElement.clientHeight);
+    //   });
   }
 
 }
