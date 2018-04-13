@@ -12,23 +12,23 @@
 
   <h2>Ref Icon area</h2>
   <div class="main-content">
-    <gridster [options]="gridsterOptions" [draggableOptions]="{ handlerClass: 'panel-heading' }">
+    <gridster [options]="gridsterOptions" [draggableOptions]="{ handlerClass: 'panel-heading'}">
 
-      <gridster-item *ngFor="let widget of widgets" [(x)]="widget.x" [(y)]="widget.y" [(w)]="widget.w" [(h)]="widget.h" [options]="itemOptions"
-        #gridster1 class="dashboard">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{ widget.title }}</h3>
+      <gridster-item *ngFor=" let widget of widgets " [(x)]="widget.x " [(y)]="widget.y " [(w)]="widget.w " [(h)]="widget.h" [options]="itemOptions "
+        #gridster1 class="dashboard " (change)="savePosition()">
+        <div class="panel-heading ">
+          <h3 class="panel-title ">{{ widget.title }}</h3>
         </div>
-        <div class="panel-body">
-          <app-widget [id]="widget.title" [refreshSubject]="refreshSubject" [w]="widget.w"></app-widget>
+        <div class="panel-body ">
+          <app-widget [id]="widget.title " [refreshSubject]="refreshSubject " [w]="widget.w "></app-widget>
         </div>
       </gridster-item>
 
     </gridster>
-    <!-- <app-dinamic-icon [refreshSubject]="refreshSubject" iconType="temp" devideId="lc92" min="0" max="100"></app-dinamic-icon> -->
-    <!-- <app-dinamic-icon [refreshSubject]="refreshSubject" devideId="lc92" min="0" max="100"></app-dinamic-icon> -->
+    <!-- <app-dinamic-icon [refreshSubject]="refreshSubject " iconType="temp " devideId="lc92 " min="0 " max="100 "></app-dinamic-icon> -->
+    <!-- <app-dinamic-icon [refreshSubject]="refreshSubject " devideId="lc92 " min="0 " max="100 "></app-dinamic-icon> -->
     <ul>
-      <li *ngFor="let data of datas">Devices: {{data.timestamp | date:'yy-MM-dd HH:mm:ss'}}
+      <li *ngFor="let data of datas ">Devices: {{data.timestamp | date:'yy-MM-dd HH:mm:ss'}}
 
       </li>
     </ul>

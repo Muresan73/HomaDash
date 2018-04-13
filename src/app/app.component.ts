@@ -62,11 +62,6 @@ export class AppComponent {
         breakpoint: 'lg',
         minWidth: 1250,
         lanes: 6
-      },
-      {
-        breakpoint: 'xl',
-        minWidth: 1800,
-        lanes: 8
       }
     ]
   };
@@ -75,7 +70,11 @@ export class AppComponent {
   };
 
   constructor(private _dataService: DataService) {
-    // this.loop = setInterval(() => { this.getData(); }, 986);
+    if (localStorage.getItem('widgets')) {
+      console.log('van');
+      this.widgets = JSON.parse(localStorage.getItem('widgets'));
+    }
+    // this.loop = setInterval(() => { this.getData(); }, 2000);
   }
 
   notifyChildren(timestamp: Date) {
@@ -90,6 +89,12 @@ export class AppComponent {
       this.datas.push(res);
       this.notifyChildren(res.timestamp);
     });
+
+  }
+
+  savePosition() {
+    localStorage.setItem('widgets', JSON.stringify(this.widgets));
+    console.log(JSON.stringify(this.widgets));
   }
 
   getTestData() {
