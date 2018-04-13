@@ -9,16 +9,15 @@
   </mat-grid-tile>
 </mat-grid-list> -->
 
-<div class="widgetitem">
+<div class="widgetitem" (click)="openDialog()">
   <div class="itemchart" [style.display]="hideChart?'none':'inherit'">
     kuki
+
   </div>
   <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">
     <mwl-gauge class="gauge-container five" [max]="100" [dialStartAngle]="90" [dialEndAngle]="0" [value]="value" [animated]="true"
       [animationDuration]="1">
-
     </mwl-gauge>
     <span class="value-text">{{unit}}</span>
-
   </div>
 </div>

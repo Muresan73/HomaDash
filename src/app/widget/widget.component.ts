@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import { DataService } from '../data.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DatepickerdialogComponent } from '../datepickerdialog/datepickerdialog.component';
 
 @Component({
   selector: 'app-widget',
@@ -23,14 +25,14 @@ export class WidgetComponent implements OnInit {
   get hideChart() {
     return !(this.w > 1);
   }
+  datepickerDialogRef: MatDialogRef<DatepickerdialogComponent>;
 
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService, private dialog: MatDialog) {
     Observable.fromEvent(window, 'resize')
       .debounceTime(550)
       .subscribe((event) => {
         this.resizeing();
       });
-
   }
   resizeing() {
     this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;
@@ -40,7 +42,12 @@ export class WidgetComponent implements OnInit {
     this.value = freshMeasurementData.value.valueOf();
     this.unit = freshMeasurementData.unit.toString();
   }
-
+  openDialog() {
+    this.datepickerDialogRef = this.dialog.open(DatepickerdialogComponent, {
+      height: '150px',
+      width: '300px',
+    });
+  }
   ngOnInit() {
     this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
     this.gwidth = document.getElementsByClassName('widgetitem')[0].parentElement.clientHeight;

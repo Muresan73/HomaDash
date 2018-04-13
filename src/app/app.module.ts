@@ -9,22 +9,32 @@ import { DataChartComponent } from './data-chart/data-chart.component';
 import { GridsterModule } from 'angular2gridster';
 import { WidgetComponent } from './widget/widget.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { GaugeModule } from 'angular-gauge';
+import { DatepickerdialogComponent } from './datepickerdialog/datepickerdialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DinamicIconComponent,
     DataChartComponent,
-    WidgetComponent
+    WidgetComponent,
+    DatepickerdialogComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     GridsterModule,
     MatGridListModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
     GaugeModule.forRoot()
   ],
+  entryComponents: [DatepickerdialogComponent],
   providers: [DataService],
   bootstrap: [AppComponent]
 })

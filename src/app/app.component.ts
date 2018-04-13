@@ -71,7 +71,6 @@ export class AppComponent {
     ]
   };
   itemOptions = {
-    maxWidth: 3,
     maxHeight: 1
   };
 

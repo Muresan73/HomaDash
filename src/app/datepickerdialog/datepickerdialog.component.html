@@ -1,0 +1,16 @@
+<div class="dialogdiv">
+  <div class="pickers">
+    <div>
+      <input matInput [matDatepicker]="picker1" placeholder="Choose start date" (focus)="picker1.open()">
+      <mat-datepicker #picker1></mat-datepicker>
+    </div>
+    <div>
+      <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" placeholder="Choose end date">
+      <mat-datepicker #picker2></mat-datepicker>
+    </div>
+  </div>
+  <div class="submitbutton">
+    <button type="submit">gomb</button>
+  </div>
+
+</div>

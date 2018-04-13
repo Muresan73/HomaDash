@@ -1,0 +1,29 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.dialogdiv {
+    display: flex;
+    height: 100%;
+}
+
+.submitbutton {
+    flex: 1;
+    float: left;
+    height: 100%;
+}
+
+.submitbutton>button {
+    width: 100%;
+    height: 100%;
+}
+
+.pickers {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pickers>div {
+    padding-top: 16px;
+    flex: 1;
+    margin: auto;
+}
