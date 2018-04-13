@@ -51,23 +51,9 @@ router.get('/mmnts', (req, res) => {
 });
 
 // GET data specs
-router.get('/specs', (req, res) => {
-    console.log("sent specs");
-    let specsResponse = [
-        {
-            deviceid: "lc92",
-            unit: "Volt"
-        },
-        {
-            deviceid: "pq44",
-            unit: "Bar"
-        },
-        {
-            deviceid: "ks89",
-            unit: "Nm"
-        }
-    ]
-        ;
+router.get('/devices', (req, res) => {
+    console.log("sent devices");
+    let specsResponse = ['lc92', 'pq44', 'pq44'];
     res.json(specsResponse);
 });
 

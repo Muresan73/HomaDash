@@ -24,4 +24,8 @@ export class DataService {
     return this._http.get('/api/mmnts')
       .map(result => this.LatestData = result.json() as Measurements);
   }
+  getDevices(): Observable<Array<String>> {
+    return this._http.get('/api/devices')
+      .map(result => result.json() as Array<String>);
+  }
 }

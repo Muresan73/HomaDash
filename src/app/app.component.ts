@@ -6,13 +6,15 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import { AnimateTimings } from '@angular/core/src/animation/dsl';
 import { WidgetComponent } from './widget/widget.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
 
   loop: any;
   datas = new Array<Measurements>();
@@ -20,23 +22,7 @@ export class AppComponent {
 
   refreshSubject = new Subject();
 
-  widgets: Array<any> = [
-    {
-      x: 0, y: 0,
-      w: 2, h: 1,
-      resizable: true,
-      title: 'lc92'
-    },
-    {
-      x: 0, y: 1, w: 3, h: 1,
-      resizable: true,
-      title: 'pq44'
-    }, {
-      x: 1, y: 0, w: 3, h: 1,
-      resizable: true,
-      title: 'pq44'
-    }
-  ];
+  widgets: Array<any>;
   gridsterOptions = {
     lanes: 5, // how many lines (grid cells) dashboard has
     direction: 'vertical', // items floating direction: vertical/horizontal
@@ -70,11 +56,26 @@ export class AppComponent {
   };
 
   constructor(private _dataService: DataService) {
-    if (localStorage.getItem('widgets')) {
-      console.log('van');
-      this.widgets = JSON.parse(localStorage.getItem('widgets'));
-    }
+
+
     // this.loop = setInterval(() => { this.getData(); }, 2000);
+  }
+
+  ngOnInit(): void {
+    this._dataService.getDevices().subscribe(res => {
+      this.widgets = res.map(x => ({
+        title: x, w: 2, h: 1,
+        resizable: true,
+      }));
+
+      if (localStorage.getItem('widgets')) {
+        const storedwidgets = JSON.parse(localStorage.getItem('widgets'));
+        if (this.widgets.map(element => element.title).reduce((x, y) => x + y)
+          === storedwidgets.map(element => element.title).reduce((x, y) => x + y)) {
+          this.widgets = storedwidgets;
+        }
+      }
+    });
   }
 
   notifyChildren(timestamp: Date) {
@@ -94,7 +95,6 @@ export class AppComponent {
 
   savePosition() {
     localStorage.setItem('widgets', JSON.stringify(this.widgets));
-    console.log(JSON.stringify(this.widgets));
   }
 
   getTestData() {
