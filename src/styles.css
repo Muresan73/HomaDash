@@ -74,6 +74,22 @@ mwl-gauge>.gauge>.value-text {
     font-size: 1.5em;
 }
 
+mwl-gauge.high>.gauge>.value {
+    stroke: rgb(255, 0, 0);
+}
+
+mwl-gauge.high>.gauge>.value-text {
+    fill: rgb(255, 0, 0);
+}
+
+mwl-gauge.low>.gauge>.value {
+    stroke: rgb(0, 0, 255);
+}
+
+mwl-gauge.low>.gauge>.value-text {
+    fill: rgb(0, 0, 255);
+}
+
 .value-text {
     color: #C9DE3C;
     position: relative;

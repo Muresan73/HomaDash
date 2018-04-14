@@ -14,8 +14,8 @@
     <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject"></app-data-chart>
   </div>
   <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">
-    <mwl-gauge class="gauge-container five" [max]="100" [dialStartAngle]="90" [dialEndAngle]="0" [value]="value" [animated]="true"
-      [animationDuration]="1">
+    <mwl-gauge [class.high]="value > (max-((max-min)*0.1))" [class.low]="value < (min+((max-min)*0.1))" class="gauge-container five"
+      [max]="max" [min]="min" [dialStartAngle]="90" [dialEndAngle]="0" [value]="value" [animated]="true" [animationDuration]="1">
     </mwl-gauge>
     <span class="value-text">{{unit}}</span>
   </div>

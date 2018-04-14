@@ -19,6 +19,8 @@ export class WidgetComponent implements OnInit {
   value: number;
   unit: string;
   @Input() id: String;
+  @Input() max: String;
+  @Input() min: String;
   @Input() w: Number;
   @Input() gwidth: Number;
   @Input() refreshSubject: Subject<any>;
