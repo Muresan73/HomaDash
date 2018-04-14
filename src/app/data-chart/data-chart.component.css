@@ -1,0 +1,15 @@
+:host {
+    position: relative;
+    display: flex;
+    display: -webkit-inline-box;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    height: 100%;
+    width: 100%;
+}

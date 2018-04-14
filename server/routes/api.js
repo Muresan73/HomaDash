@@ -53,7 +53,7 @@ router.get('/mmnts', (req, res) => {
 // GET data specs
 router.get('/devices', (req, res) => {
     console.log("sent devices");
-    let specsResponse = ['lc92', 'pq44', 'pq44'];
+    let specsResponse = ['lc92', 'pq44', 'ks89'];
     res.json(specsResponse);
 });
 

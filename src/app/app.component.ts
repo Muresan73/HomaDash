@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     lanes: 5, // how many lines (grid cells) dashboard has
     direction: 'vertical', // items floating direction: vertical/horizontal
     widthHeightRatio: 1,
-    floating: true,
+    floating: false,
     resizable: true, // possible to resize items by drag n drop by item edge/corner
     useCSSTransforms: true, // improves rendering performance by using CSS transform in place of left/top
     responsiveView: true, // turn on adopting items sizes on window resize and enable responsiveOptions
@@ -56,8 +56,6 @@ export class AppComponent implements OnInit {
   };
 
   constructor(private _dataService: DataService) {
-
-
     // this.loop = setInterval(() => { this.getData(); }, 2000);
   }
 
@@ -70,7 +68,7 @@ export class AppComponent implements OnInit {
 
       if (localStorage.getItem('widgets')) {
         const storedwidgets = JSON.parse(localStorage.getItem('widgets'));
-        if (this.widgets.map(element => element.title).reduce((x, y) => x + y)
+        if (res.reduce((x, y) => x.toString() + y.toString())
           === storedwidgets.map(element => element.title).reduce((x, y) => x + y)) {
           this.widgets = storedwidgets;
         }
@@ -90,16 +88,15 @@ export class AppComponent implements OnInit {
       this.datas.push(res);
       this.notifyChildren(res.timestamp);
     });
-
   }
 
   savePosition() {
     localStorage.setItem('widgets', JSON.stringify(this.widgets));
+    console.log(this.widgets);
   }
 
   getTestData() {
     this._dataService.getMeasurementData().subscribe(res => console.log(res));
-
   }
 
   stopit() {
