@@ -62,13 +62,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._dataService.getDevices().subscribe(res => {
       this.widgets = res.map(x => ({
-        title: x, w: 2, h: 1,
-        resizable: true,
+        title: x.deviceid, w: 2, h: 1, max: x.max, min: x.min
       }));
 
       if (localStorage.getItem('widgets')) {
         const storedwidgets = JSON.parse(localStorage.getItem('widgets'));
-        if (res.reduce((x, y) => x.toString() + y.toString())
+        if (res.map(x => x.deviceid).reduce((x, y) => x.toString() + y.toString())
           === storedwidgets.map(element => element.title).reduce((x, y) => x + y)) {
           this.widgets = storedwidgets;
         }
@@ -92,7 +91,6 @@ export class AppComponent implements OnInit {
 
   savePosition() {
     localStorage.setItem('widgets', JSON.stringify(this.widgets));
-    console.log(this.widgets);
   }
 
   getTestData() {

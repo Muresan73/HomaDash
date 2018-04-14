@@ -10,3 +10,9 @@ export interface Measurements {
     devices: MeasurementObject[];
     timestamp: Date;
 }
+
+export interface deviceSpec {
+    deviceid: String;
+    max: Number;
+    min: Number;
+}

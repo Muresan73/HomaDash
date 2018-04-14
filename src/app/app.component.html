@@ -20,7 +20,7 @@
           <h3 class="panel-title ">{{ widget.title }}</h3>
         </div>
         <div class="panel-body ">
-          <app-widget [id]="widget.title " [refreshSubject]="refreshSubject " [w]="widget.w " max=100 min=0></app-widget>
+          <app-widget [id]="widget.title " [refreshSubject]="refreshSubject " [w]="widget.w " [max]="widget.max" [min]="widget.min"></app-widget>
         </div>
       </gridster-item>
 

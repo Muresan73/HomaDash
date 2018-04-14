@@ -36,7 +36,7 @@ router.get('/mmnts', (req, res) => {
                 unit: "Volt"
             },
             {
-                deviceid: "pq44",
+                deviceid: "XX44",
                 value: Date.now() * 7 % 100,
                 unit: "Bar"
             },
@@ -53,7 +53,10 @@ router.get('/mmnts', (req, res) => {
 // GET data specs
 router.get('/devices', (req, res) => {
     console.log("sent devices");
-    let specsResponse = ['lc92', 'pq44', 'ks89'];
+    let specsResponse = [
+        { deviceid: 'lc92', max: 100, min: -200 },
+        { deviceid: 'XX44', max: 98, min: 0 },
+        { deviceid: 'ks89', max: 100, min: 0 }];
     res.json(specsResponse);
 });
 

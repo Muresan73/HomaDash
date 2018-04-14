@@ -19,8 +19,8 @@ export class WidgetComponent implements OnInit {
   value: number;
   unit: string;
   @Input() id: String;
-  @Input() max: String;
-  @Input() min: String;
+  @Input() max: number;
+  @Input() min: number;
   @Input() w: Number;
   @Input() gwidth: Number;
   @Input() refreshSubject: Subject<any>;
@@ -43,6 +43,7 @@ export class WidgetComponent implements OnInit {
     const freshMeasurementData = this._dataService.getMeasurementDataById(this.id.toString());
     this.value = freshMeasurementData.value.valueOf();
     this.unit = freshMeasurementData.unit.toString();
+    if (this.value > this.max) { alert('Warning:\n' + this.id.toString() + ' has bigger value than max'); }
   }
   openDialog() {
     this.datepickerDialogRef = this.dialog.open(DatepickerdialogComponent, {
