@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatepickerdialogComponent implements OnInit {
 
+  data: { startDate: Date, endDate: Date };
+
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

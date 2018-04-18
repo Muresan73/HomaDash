@@ -1,16 +1,18 @@
 <div class="dialogdiv">
   <div class="pickers">
     <div>
-      <input matInput [matDatepicker]="picker1" placeholder="Choose start date" (focus)="picker1.open()">
+      <p>Start Date</p>
+      <input matInput [matDatepicker]="picker1" placeholder="Choose start date" (click)="picker1.open()" [(ngModel)]="data.startDate">
       <mat-datepicker #picker1></mat-datepicker>
     </div>
     <div>
-      <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" placeholder="Choose end date">
+      <p>End Date</p>
+      <input matInput [matDatepicker]="picker2" (focus)="picker2.open()" placeholder="Choose end date" [(ngModel)]="data.endDate">
       <mat-datepicker #picker2></mat-datepicker>
     </div>
   </div>
   <div class="submitbutton">
-    <button type="submit">gomb</button>
+    <button mat-button [mat-dialog-close]="{ startDate: data.startDate, endDate: data.endDate }">gomb</button>
   </div>
 
 </div>

@@ -60,4 +60,55 @@ router.get('/devices', (req, res) => {
     res.json(specsResponse);
 });
 
+// Post data 
+router.post('/interval', (req, res) => {
+    console.log("sent post test data ");
+    console.log(req.body);
+
+    st = req.body.startdate
+    et = req.body.enddate
+    console.log("st: " + st);
+    console.log("et: " + et);
+    let testintervalResponse = [{
+        timestamp: st,
+        devices: [
+            {
+                deviceid: "lc92",
+                value: new Date() * 13 % 100,
+                unit: "Volt"
+            },
+            {
+                deviceid: "XX44",
+                value: new Date() * 7 % 100,
+                unit: "Bar"
+            },
+            {
+                deviceid: "ks89",
+                value: new Date() * 17 % 100,
+                unit: "Nm"
+            }
+        ]
+    }, {
+        timestamp: et,
+        devices: [
+            {
+                deviceid: "lc92",
+                value: new Date() * 22 % 100,
+                unit: "Volt"
+            },
+            {
+                deviceid: "XX44",
+                value: new Date() * 44 % 100,
+                unit: "Bar"
+            },
+            {
+                deviceid: "ks89",
+                value: new Date() * 38 % 100,
+                unit: "Nm"
+            }
+        ]
+    }];
+    res.json(testintervalResponse);
+});
+
 module.exports = router;

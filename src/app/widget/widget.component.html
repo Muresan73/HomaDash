@@ -11,7 +11,7 @@
 
 <div class="widgetitem" (click)="openDialog()">
   <div class="itemchart" [style.display]="hideChart?'none':'inherit'">
-    <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject"></app-data-chart>
+    <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject" [timeFrame]="timeFrame" [deviceid]="id"></app-data-chart>
   </div>
   <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">
     <mwl-gauge [class.high]="value > (max-((max-min)*0.1))" [class.low]="value < (min+((max-min)*0.1))" class="gauge-container five"

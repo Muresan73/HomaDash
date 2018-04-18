@@ -23,7 +23,11 @@
 }
 
 .pickers>div {
-    padding-top: 16px;
+    padding-top: 7px;
     flex: 1;
     margin: auto;
+}
+
+p {
+    margin: 0
 }

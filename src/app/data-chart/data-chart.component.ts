@@ -11,11 +11,20 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./data-chart.component.css']
 })
 export class DataChartComponent implements OnInit {
+  private _timeFrame: { startDate: Date, endDate: Date };
+  @Input()
+  set timeFrame(timeFrame: { startDate: Date, endDate: Date }) {
+    this.getFreshData();
+    this._timeFrame = timeFrame;
+  }
+  get timeFrame() { return this._timeFrame; }
+
+  @Input() deviceid: String;
 
   public lineChartData: Array<any> = [
-    { data: [], label: 'Value' }
+    { data: [62, 62], label: 'Value' }
   ];
-  public lineChartLabels: Array<any> = [];
+  public lineChartLabels: Array<any> = [1523466380049, 1524071180049];
   public lineChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -65,22 +74,31 @@ export class DataChartComponent implements OnInit {
 
   constructor(private _dataService: DataService) { }
 
-  getFreshData(timestamp: Date) {
-    const measurementObject = this._dataService.getMeasurementDataById(this.devideId);
-    this.lineChartLabels.push(timestamp);
-    this.lineChartData = this.lineChartData.map((dataset, index) => {
-      return { data: dataset.data.concat(measurementObject.value), label: dataset.label };
+  getFreshData() {
 
-    });
+    if (this.timeFrame) {
+      console.log(this.lineChartData);
+      this._dataService.getMeasurementsInTimefare(this.timeFrame.startDate, this.timeFrame.endDate).subscribe(res => {
+        this.lineChartLabels = res.map(x => x.timestamp);
+        this.lineChartData = [{
+          data: res.map(x => x.devices.filter(device => device.deviceid === this.deviceid)[0].value),
+          label: 'value'
+        }];
+
+        console.log('kert');
+        console.log(this.lineChartLabels);
+
+      });
+    }
   }
+
 
 
   ngOnInit(): void {
 
-    console.log(this.devideId);
-    console.log(document.getElementById(this.devideId));
+    // this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
 
-    this.refreshSubject.subscribe(timestamp => this.getFreshData(timestamp));
+
     // console.log(document.getElementById(this.devideId).getElementsByClassName('datachart')[0]);
     /*this.chart = new Chart(document.getElementById(this.devideId).getElementsByClassName('datachart')[0],
       {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { GaugeSegment, GaugeLabel } from 'ng-gauge';
 import 'rxjs/add/operator/map';
@@ -18,6 +18,8 @@ export class WidgetComponent implements OnInit {
 
   value: number;
   unit: string;
+
+  timeFrame = { endDate: new Date(), startDate: new Date(new Date().getTime() - (60 * 60 * 24 * 7 * 1000)) };
   @Input() id: String;
   @Input() max: number;
   @Input() min: number;
@@ -29,7 +31,8 @@ export class WidgetComponent implements OnInit {
   }
   datepickerDialogRef: MatDialogRef<DatepickerdialogComponent>;
 
-  constructor(private _dataService: DataService, private dialog: MatDialog) {
+  constructor(private _dataService: DataService, public dialog: MatDialog) {
+    this.value = 0;
     Observable.fromEvent(window, 'resize')
       .debounceTime(550)
       .subscribe((event) => {
@@ -49,6 +52,13 @@ export class WidgetComponent implements OnInit {
     this.datepickerDialogRef = this.dialog.open(DatepickerdialogComponent, {
       height: '150px',
       width: '300px',
+    });
+
+    this.datepickerDialogRef.componentInstance.data = this.timeFrame;
+
+    this.datepickerDialogRef.afterClosed().subscribe(result => {
+      this.timeFrame = result;
+      console.log(this.timeFrame);
     });
   }
   ngOnInit() {

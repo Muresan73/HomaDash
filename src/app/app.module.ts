@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GaugeModule } from 'angular-gauge';
 import { DatepickerdialogComponent } from './datepickerdialog/datepickerdialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DatepickerdialogComponent } from './datepickerdialog/datepickerdialog.c
     DatepickerdialogComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpModule,
     GridsterModule,
