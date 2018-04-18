@@ -1,2 +1,4 @@
-<canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
-    [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+<!-- after chart.js bug fix remove: *ngIf="lineChartLabels!=0" -->
+
+<canvas *ngIf="lineChartLabels!=0" baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+    [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>

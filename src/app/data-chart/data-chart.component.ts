@@ -14,17 +14,17 @@ export class DataChartComponent implements OnInit {
   private _timeFrame: { startDate: Date, endDate: Date };
   @Input()
   set timeFrame(timeFrame: { startDate: Date, endDate: Date }) {
-    this.getFreshData();
     this._timeFrame = timeFrame;
+    this.getFreshData();
   }
   get timeFrame() { return this._timeFrame; }
 
   @Input() deviceid: String;
 
   public lineChartData: Array<any> = [
-    { data: [62, 62], label: 'Value' }
+    { data: [], label: 'Value' }
   ];
-  public lineChartLabels: Array<any> = [1523466380049, 1524071180049];
+  public lineChartLabels: Array<any> = [];
   public lineChartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -75,21 +75,21 @@ export class DataChartComponent implements OnInit {
   constructor(private _dataService: DataService) { }
 
   getFreshData() {
+    this.lineChartLabels = [];
 
-    if (this.timeFrame) {
-      console.log(this.lineChartData);
-      this._dataService.getMeasurementsInTimefare(this.timeFrame.startDate, this.timeFrame.endDate).subscribe(res => {
-        this.lineChartLabels = res.map(x => x.timestamp);
-        this.lineChartData = [{
-          data: res.map(x => x.devices.filter(device => device.deviceid === this.deviceid)[0].value),
-          label: 'value'
-        }];
+    // console.log(this.lineChartData);
+    this._dataService.getMeasurementsInTimefare(this.timeFrame.startDate, this.timeFrame.endDate).subscribe(res => {
 
-        console.log('kert');
-        console.log(this.lineChartLabels);
+      this.lineChartLabels = res.map(x => x.timestamp);
+      this.lineChartData = [{
+        data: res.map(x => x.devices.filter(device => device.deviceid === this.deviceid)[0].value),
+        label: 'value'
+      }];
 
-      });
-    }
+      // console.log('kert');
+      // console.log(this.lineChartLabels);
+      // console.log(this.lineChartData);
+    });
   }
 
 

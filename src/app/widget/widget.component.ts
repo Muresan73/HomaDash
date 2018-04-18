@@ -57,8 +57,7 @@ export class WidgetComponent implements OnInit {
     this.datepickerDialogRef.componentInstance.data = this.timeFrame;
 
     this.datepickerDialogRef.afterClosed().subscribe(result => {
-      this.timeFrame = result;
-      console.log(this.timeFrame);
+      if (result) { this.timeFrame = result; }
     });
   }
   ngOnInit() {
