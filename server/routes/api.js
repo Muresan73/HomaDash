@@ -16,17 +16,10 @@ let response = {
 };
 
 var i = 0;
-// Get testdata
-router.get('/test', (req, res) => {
-    console.log("sent data: " + i);
-    response.data = [i]
-    i = i + 1;
-    res.json(response);
-});
 
 // GET measurements
 router.get('/mmnts', (req, res) => {
-    console.log("sent measurements test data ");
+    console.log(new Date().toISOString() + " -> sent measurements test data ");
     let testmmntResponse = {
         timestamp: Date.now(),
         devices: [
@@ -52,7 +45,7 @@ router.get('/mmnts', (req, res) => {
 
 // GET data specs
 router.get('/devices', (req, res) => {
-    console.log("sent devices");
+    console.log(new Date().toISOString() + " -> sent devices");
     let specsResponse = [
         { deviceid: 'lc92', max: 100, min: -200 },
         { deviceid: 'XX44', max: 98, min: 0 },
@@ -62,29 +55,27 @@ router.get('/devices', (req, res) => {
 
 // Post data 
 router.post('/interval', (req, res) => {
-    console.log("sent post test data ");
+    console.log(new Date().toISOString() + " -> sent post test data ");
     console.log(req.body);
 
     st = req.body.startdate
     et = req.body.enddate
-    console.log("st: " + st);
-    console.log("et: " + et);
     let testintervalResponse = [{
         timestamp: st,
         devices: [
             {
                 deviceid: "lc92",
-                value: new Date() * 13 % 100,
+                value: st * 13 % 100,
                 unit: "Volt"
             },
             {
                 deviceid: "XX44",
-                value: new Date() * 7 % 100,
+                value: st * 7 % 100,
                 unit: "Bar"
             },
             {
                 deviceid: "ks89",
-                value: new Date() * 17 % 100,
+                value: st * 17 % 100,
                 unit: "Nm"
             }
         ]
@@ -93,17 +84,17 @@ router.post('/interval', (req, res) => {
         devices: [
             {
                 deviceid: "lc92",
-                value: new Date() * 22 % 100,
+                value: et * 22 % 100,
                 unit: "Volt"
             },
             {
                 deviceid: "XX44",
-                value: new Date() * 44 % 100,
+                value: et * 44 % 100,
                 unit: "Bar"
             },
             {
                 deviceid: "ks89",
-                value: new Date() * 38 % 100,
+                value: et * 38 % 100,
                 unit: "Nm"
             }
         ]

@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
 
 import { AppComponent } from './app.component';
-import { DinamicIconComponent } from './dinamic-icon/dinamic-icon.component';
 import { DataChartComponent } from './data-chart/data-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { GridsterModule } from 'angular2gridster';
@@ -20,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    DinamicIconComponent,
     DataChartComponent,
     WidgetComponent,
     DatepickerdialogComponent

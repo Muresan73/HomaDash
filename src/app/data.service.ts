@@ -11,11 +11,6 @@ export class DataService {
 
   LatestData: Measurements;
 
-  getTestData() {
-    return this._http.get('/api/test')
-      .map(result => result.json().data);
-  }
-
   getMeasurementDataById(deviceId: string): MeasurementObject {
     return this.LatestData.devices.find(res => res.deviceid === deviceId);
   }

@@ -17,8 +17,6 @@ export class AppComponent implements OnInit {
 
 
   loop: any;
-  datas = new Array<Measurements>();
-  chart: Chart;
 
   refreshSubject = new Subject();
 
@@ -81,20 +79,12 @@ export class AppComponent implements OnInit {
 
   getData() {
     this._dataService.getMeasurementData().subscribe(res => {
-      if (this.datas.length > 3) {
-        this.datas.shift();
-      }
-      this.datas.push(res);
       this.notifyChildren(res.timestamp);
     });
   }
 
   savePosition() {
     localStorage.setItem('widgets', JSON.stringify(this.widgets));
-  }
-
-  getTestData() {
-    this._dataService.getMeasurementData().subscribe(res => console.log(res));
   }
 
   stopit() {
