@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
+import { WebsocketService } from './websocket.service';
 
 import { AppComponent } from './app.component';
 import { DataChartComponent } from './data-chart/data-chart.component';
@@ -37,7 +38,7 @@ import { FormsModule } from '@angular/forms';
     ChartsModule
   ],
   entryComponents: [DatepickerdialogComponent],
-  providers: [DataService],
+  providers: [DataService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, AnimationTransitionMetadata, AnimationTransitionEvent } from '@angular/core';
 import { DataService } from './data.service';
+import { WebsocketService } from './websocket.service';
 import { Measurements } from './model/measurements';
 import { Chart } from 'chart.js';
 import { Subject } from 'rxjs/Subject';
@@ -53,11 +54,14 @@ export class AppComponent implements OnInit {
     maxHeight: 1
   };
 
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService, private _websocketService: WebsocketService) {
     // this.loop = setInterval(() => { this.getData(); }, 2000);
   }
 
   ngOnInit(): void {
+    this._websocketService.messageSubject.subscribe(msg => {
+      this.getData();
+    });
     this._dataService.getDevices().subscribe(res => {
       this.widgets = res.map(x => ({
         title: x.deviceid, w: 2, h: 1, max: x.max, min: x.min
@@ -88,6 +92,7 @@ export class AppComponent implements OnInit {
   }
 
   stopit() {
+    this._websocketService.confirmMessage();
     clearInterval(this.loop);
   }
 }

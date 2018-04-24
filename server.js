@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const http = require('http');
 const app = express();
+const server = require('http').Server(app);
+let io = require('socket.io')(server);
 
-// API file for interacting with MongoDB
+
 const api = require('./server/routes/api');
 
 // Parsers
@@ -17,6 +18,27 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // API location
 app.use('/api', api);
 
+
+
+io.on('connection', (socket) => {
+
+    // Log whenever a user connects
+    console.log(socket.request.connection.remoteAddress + ' connected in port: ' + socket.request.connection.remotePort);
+
+    // Log whenever a client disconnects from our websocket server
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+
+    // When we receive a 'message' event from our client, print out
+    // the contents of that message and then echo it back to our client
+    // using `io.emit()`
+    socket.on('message', (message) => {
+        console.log("Message Received: " + message);
+        io.emit('message', { message: "new data available", timestamp: Date.now() });
+    });
+});
+
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
@@ -26,6 +48,5 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
-const server = http.createServer(app);
 
 server.listen(port, () => console.log(`Running on localhost:${port}`));
