@@ -9,8 +9,8 @@
   </mat-grid-tile>
 </mat-grid-list> -->
 
-<div class="widgetitem" (click)="openDialog()">
-  <div class="itemchart" [style.display]="hideChart?'none':'inherit'">
+<div class="widgetitem" (click)="openDialog($event)">
+  <div class="itemchart" [class.selected]="isSelected" [style.display]="hideChart?'none':'inherit'">
     <app-data-chart id={{id}} [devideId]="id" [refreshSubject]="refreshSubject" [timeFrame]="timeFrame" [deviceid]="id"></app-data-chart>
   </div>
   <div class="itemgauge" [ngStyle]="{'width': hideChart? '100%' : gwidth+'px'}">

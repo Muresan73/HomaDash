@@ -18,6 +18,10 @@
     overflow: hidden;
 }
 
+.itemchart.selected {
+    background: rgb(247, 255, 176);
+}
+
 .widgetitem {
     display: flex;
     width: 100%;

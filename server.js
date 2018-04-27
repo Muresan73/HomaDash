@@ -23,11 +23,11 @@ app.use('/api', api);
 io.on('connection', (socket) => {
 
     // Log whenever a user connects
-    console.log(socket.request.connection.remoteAddress + ' connected in port: ' + socket.request.connection.remotePort);
+    console.log('user ' + socket.request.connection.remoteAddress + ' connected in port: ' + socket.request.connection.remotePort);
 
     // Log whenever a client disconnects from our websocket server
     socket.on('disconnect', function () {
-        console.log('user disconnected');
+        console.log('user disconnected: ' + socket.request.connection.remoteAddress);
     });
 
     // When we receive a 'message' event from our client, print out
