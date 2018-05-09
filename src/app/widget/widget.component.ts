@@ -59,7 +59,7 @@ export class WidgetComponent implements OnInit {
     });
 
     console.log(event.which);
-    this.datepickerDialogRef.updatePosition({ top: event.clientY.toString() + 'px', left: event.clientX.toString() + 'px' });
+    // this.datepickerDialogRef.updatePosition({ top: event.clientY.toString() + 'px', left: event.clientX.toString() + 'px' });
 
     this.datepickerDialogRef.componentInstance.data = this.timeFrame;
 
