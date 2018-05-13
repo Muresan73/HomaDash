@@ -67,11 +67,13 @@ mwl-gauge>.gauge>.dial {
 mwl-gauge>.gauge>.value {
     stroke: #C9DE3C;
     stroke-width: 10;
+    transition: stroke 1s ease-out;
 }
 
 mwl-gauge>.gauge>.value-text {
     fill: #C9DE3C;
     font-size: 1.5em;
+    transition: fill 1s ease-out;
 }
 
 mwl-gauge.high>.gauge>.value {

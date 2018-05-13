@@ -9,6 +9,7 @@ export class WebsocketService {
 
     // Our socket connection
     private socket;
+    isConnected: Subject<boolean>;
     messageSubject: Subject<any>;
 
     constructor() {
@@ -16,6 +17,7 @@ export class WebsocketService {
             .map((response: any): any => {
                 return response;
             });
+        this.isConnected = new Subject();
     }
 
     connect(): Subject<MessageEvent> {
@@ -24,6 +26,8 @@ export class WebsocketService {
         this.socket = io(environment.url);
         // We define our observable which will observe any incoming messages
         // from our socket.io server.
+        this.socket.on('connect_error', () => this.isConnected.next(false));
+        this.socket.on('connect', () => this.isConnected.next(true));
         const observable = new Observable(observed => {
             this.socket.on('message', (data: { message: String, timestamp: Date }) => {
                 console.log(`Received message from Websocket Server\n [${new Date(data.timestamp).toISOString()}]`);
@@ -31,6 +35,7 @@ export class WebsocketService {
             });
             return () => {
                 this.socket.disconnect();
+                this.isConnected.next(false);
             };
         });
 

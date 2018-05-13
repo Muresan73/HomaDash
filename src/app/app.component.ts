@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   loop: any;
 
   refreshSubject = new Subject();
-
+  isConnected: boolean;
   widgets: Array<any>;
   gridsterOptions = {
     lanes: 5, // how many lines (grid cells) dashboard has
@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
     this._websocketService.messageSubject.subscribe(msg => {
       this.getData();
     });
+    this._websocketService.isConnected.subscribe(status => this.isConnected = status);
     this._dataService.getDevices().subscribe(res => {
       this.widgets = res.map(x => ({
         title: x.deviceid, w: 2, h: 1, max: x.max, min: x.min

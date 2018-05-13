@@ -94,3 +94,72 @@ button:active {
 .icondiv {
     height: 170px;
 }
+
+.refresh.icon {
+    color: rgb(247, 165, 14);
+    position: absolute;
+    margin-left: 4px;
+    margin-top: 3px;
+    right: 10px;
+    float: right;
+    top: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border-top: solid 2px currentColor;
+    border-bottom: solid 2px currentColor;
+    border-left: solid 2px transparent;
+    border-right: solid 2px currentColor;
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+}
+
+.refresh.icon:before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 19px;
+    width: 6px;
+    height: 6px;
+    border-top: solid 2px currentColor;
+    border-left: solid 2px currentColor;
+    -webkit-transform: rotate(-22.5deg);
+    transform: rotate(-22.5deg);
+}
+
+@-ms-keyframes spin {
+    from {
+        -ms-transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
