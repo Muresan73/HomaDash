@@ -46,7 +46,29 @@ app.get('*', (req, res) => {
 
 //Set Port
 const port = process.env.PORT || '3000';
+const dataPort = process.env.PORT || '3001';
 app.set('port', port);
 
-
 server.listen(port, () => console.log(`Running on localhost:${port}`));
+
+
+// Receive http new data
+const datApp = express();
+const dataServer = require('http').Server(datApp);
+datApp.use(bodyParser.json());
+datApp.use(bodyParser.urlencoded({ extended: false }));
+datApp.post('*', (req, res) => {
+    var reqestdata = req.body.filter(msrmnt => msrmnt.timestamp).map(msrmnt => ({
+        timestamp: msrmnt.timestamp,
+        devices: msrmnt.devices.map(device =>
+            ({
+                deviceid: device.deviceid,
+                value: device.value,
+                unit: device.unit
+            }))
+    }))
+    console.log(reqestdata)
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end();
+});
+dataServer.listen(dataPort, 'localhost', () => console.log(`Dataserver running on localhost:${dataPort}`));
