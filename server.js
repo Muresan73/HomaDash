@@ -57,7 +57,7 @@ const datApp = express();
 const dataServer = require('http').Server(datApp);
 datApp.use(bodyParser.json());
 datApp.use(bodyParser.urlencoded({ extended: false }));
-datApp.post('*', (req, res) => {
+datApp.post('/newdata', (req, res) => {
     var reqestdata = req.body.filter(msrmnt => msrmnt.timestamp).map(msrmnt => ({
         timestamp: msrmnt.timestamp,
         devices: msrmnt.devices.map(device =>
@@ -67,8 +67,22 @@ datApp.post('*', (req, res) => {
                 unit: device.unit
             }))
     }))
+    io.emit('message', { message: "new data available", timestamp: Date.now() });
     console.log(reqestdata)
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end();
 });
 dataServer.listen(dataPort, 'localhost', () => console.log(`Dataserver running on localhost:${dataPort}`));
+
+
+// python script
+const spawn = require('child_process').spawn;
+const py = spawn('python', ['./server/routes/termo.py']);
+
+py.stdout.on('data', (data) => {
+    console.log(JSON.parse(data.toString('utf8')))
+    io.emit('message', { message: "new data available", timestamp: Date.now() });
+});
+py.stdout.on('end', function () {
+    console.log("python stoped");
+});
