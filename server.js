@@ -51,14 +51,8 @@ app.set('port', port);
 
 server.listen(port, () => console.log(`Running on localhost:${port}`));
 
-
-// Receive http new data
-const datApp = express();
-const dataServer = require('http').Server(datApp);
-datApp.use(bodyParser.json());
-datApp.use(bodyParser.urlencoded({ extended: false }));
-datApp.post('/newdata', (req, res) => {
-    var reqestdata = req.body.filter(msrmnt => msrmnt.timestamp).map(msrmnt => ({
+function loadValues(msrmnt) {
+    return {
         timestamp: msrmnt.timestamp,
         devices: msrmnt.devices.map(device =>
             ({
@@ -66,7 +60,39 @@ datApp.post('/newdata', (req, res) => {
                 value: device.value,
                 unit: device.unit
             }))
-    }))
+    }
+}
+
+// DB
+var Engine = require('tingodb')(),
+    assert = require('assert');
+
+var db = new Engine.Db('server/db', {});
+var collection = db.collection("measurements");
+// collection.insert([{ hello: 'world_safe1', kuki: "nemkuki" }
+//     , { hello: 'world_safe2', kuki: "sajt" }], { w: 1 }, function (err, result) {
+//         assert.equal(null, err);
+
+//         collection.findOne({ hello: 'world_safe2' }, function (err, item) {
+//             assert.equal(null, err);
+//             assert.equal('world_safe2', item.hello);
+//         })
+//     });
+
+// collection.findOne({ hello: 'world_safe2' }, function (err, result) {
+//     if (err) throw err;
+//     console.log(result.hello);
+//     db.close();
+// });
+
+
+// Receive http new data
+const datApp = express();
+const dataServer = require('http').Server(datApp);
+datApp.use(bodyParser.json());
+datApp.use(bodyParser.urlencoded({ extended: false }));
+datApp.post('/newdata', (req, res) => {
+    var reqestdata = loadValues(req.body)
     io.emit('message', { message: "new data available", timestamp: Date.now() });
     console.log(reqestdata)
     res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -77,10 +103,12 @@ dataServer.listen(dataPort, 'localhost', () => console.log(`Dataserver running o
 
 // python script
 const spawn = require('child_process').spawn;
-const py = spawn('python', ['./server/routes/termo.py']);
+const py = spawn('python3', ['./server/routes/termo.py']);
 
 py.stdout.on('data', (data) => {
-    console.log(JSON.parse(data.toString('utf8')))
+    cleanData = loadValues(JSON.parse(data.toString('utf8')))
+    console.log("data recieved -> " + new Date(cleanData.timestamp).toISOString())
+    collection.insert(cleanData)
     io.emit('message', { message: "new data available", timestamp: Date.now() });
 });
 py.stdout.on('end', function () {

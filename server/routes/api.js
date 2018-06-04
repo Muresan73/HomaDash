@@ -1,5 +1,10 @@
 const express = require('express');
 const router = express.Router();
+// DB
+var Engine = require('tingodb')(),
+    assert = require('assert');
+
+
 
 // Error handling
 const sendError = (err, res) => {
@@ -20,35 +25,24 @@ var i = 0;
 // GET measurements
 router.get('/mmnts', (req, res) => {
     console.log(new Date().toISOString() + " -> sent measurements test data ");
-    let testmmntResponse = {
-        timestamp: Date.now(),
-        devices: [
-            {
-                deviceid: "lc92",
-                value: Date.now() * 13 % 100,
-                unit: "Volt"
-            },
-            {
-                deviceid: "XX44",
-                value: Date.now() * 7 % 100,
-                unit: "Bar"
-            },
-            {
-                deviceid: "ks89",
-                value: Date.now() * 17 % 100,
-                unit: "Nm"
-            }
-        ]
-    };
-    res.json(testmmntResponse);
+
+    var db = new Engine.Db('server/db', {});
+    var collection = db.collection("measurements");
+    var cursor = collection.find({}, { '_id': 0 }).sort({ _id: -1 }).limit(1);
+    cursor.toArray(function (err, results) {
+        if (err) throw err;
+        return res.json(results[0])
+        db.close();
+    });
+
 });
 
 // GET data specs
 router.get('/devices', (req, res) => {
     console.log(new Date().toISOString() + " -> sent devices");
     let specsResponse = [
-        { deviceid: 'lc92', max: 100, min: -200 },
-        { deviceid: 'XX44', max: 98, min: 0 },
+        { deviceid: 'lc92', max: 100, min: -50 },
+        { deviceid: 'XX44', max: 100, min: 0 },
         { deviceid: 'ks89', max: 100, min: 0 }];
     res.json(specsResponse);
 });
