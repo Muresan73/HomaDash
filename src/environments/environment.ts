@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   // url: '192.168.0.133:3000'
-  url: 'localhost:3000'
+  url: 'raspberrypi.local:3000'
 };
